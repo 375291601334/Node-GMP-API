@@ -1,0 +1,22 @@
+{
+  "name": "node-gmp-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/375291601334/Node-GMP-API.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/375291601334/Node-GMP-API/issues"
+  },
+  "homepage": "https://github.com/375291601334/Node-GMP-API#readme",
+  "devDependencies": {
+    "@types/node": "^20.7.0",
+    "typescript": "^5.2.2"
+  }
+}
