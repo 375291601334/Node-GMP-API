@@ -45,9 +45,9 @@ export function getAllUsers(): Omit<User, 'hobbies'>[] {
   return users.map(addHypermediaLinksToUser).map(removeHobbiesProp);
 }
 
-export function addUser(user: Omit<User, 'id'>): User {
+export function addUser(user: Omit<User, 'id' | 'hobbies'>): User {
   const newId = users[users.length - 1].id + 1;
-  const newUser = { ...user, id: newId };
+  const newUser = { hobbies: [], ...user, id: newId };
 
   users.push(newUser);
   return addHypermediaLinksToUser(newUser);
@@ -67,5 +67,6 @@ export function updateUser(id: number, userProps: Partial<Omit<User, 'id'>>) {
   if (user) {
     const updatedUser = { ...user, ...userProps };
     users = users.map((user) => user.id === id ? updatedUser : user);
+    return removeHobbiesProp(addHypermediaLinksToUser(updatedUser));
   }
 }
