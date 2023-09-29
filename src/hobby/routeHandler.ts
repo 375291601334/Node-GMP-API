@@ -22,7 +22,7 @@ export function getHobbiesForUser(req: IncomingMessage, res: ServerResponse) {
 
     try {
       const hobbies = service.getHobbies(userId);
-      res.writeHead(200);
+      res.writeHead(200, { 'Cache-Control': 'public, max-age=3600;' });
       res.end(JSON.stringify(hobbies));
     } catch (e) {
       res.writeHead(404);
