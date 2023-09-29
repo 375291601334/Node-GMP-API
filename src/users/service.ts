@@ -15,9 +15,18 @@ export let users: User[] = [
   },
 ];
 
-function filterUserProps(user: User): Omit<User, 'hobbies'> {
-  const { id, name, email } = user;
-  return { id, name, email };
+function removeHobbiesProp(user: User): Omit<User, 'hobbies'> {
+  const { hobbies, ...userProps } = user;
+  return userProps;
+}
+
+function addHypermediaLinksToUser(user: User) {
+  return {
+    ...user,
+    links: [
+      { rel: 'hobbies', href: `/hobbies?user=${user.id}` }
+    ],
+  }
 }
 
 export function getUserWithHobbies(id: number): User {
@@ -29,11 +38,11 @@ export function getUserWithHobbies(id: number): User {
 }
 
 export function getUser(id: number): Omit<User, 'hobbies'> {
-  return filterUserProps(getUserWithHobbies(id));
+  return removeHobbiesProp(addHypermediaLinksToUser(getUserWithHobbies(id)));
 }
 
 export function getAllUsers(): Omit<User, 'hobbies'>[] {
-  return users.map(filterUserProps);
+  return users.map(addHypermediaLinksToUser).map(removeHobbiesProp);
 }
 
 export function addUser(user: Omit<User, 'id'>): User {
@@ -41,7 +50,7 @@ export function addUser(user: Omit<User, 'id'>): User {
   const newUser = { ...user, id: newId };
 
   users.push(newUser);
-  return newUser;
+  return addHypermediaLinksToUser(newUser);
 }
 
 export function deleteUser(id: number) {
