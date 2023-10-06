@@ -4,6 +4,7 @@
   "description": "",
   "main": "",
   "scripts": {
+    "start": "npx ts-node src/app.ts"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   "homepage": "https://github.com/375291601334/Node-GMP-API#readme",
   "devDependencies": {
     "@types/node": "^20.7.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   }
 }
